@@ -1,7 +1,7 @@
 package com.example.firstproject.controller;
 
 import com.example.firstproject.dto.ArticleForm;
-import com.example.firstproject.entity.Article;
+import com.example.firstproject.repository.entity.Article;
 import com.example.firstproject.repository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 @Slf4j // 로깅을 위한 골뱅이(어노테이션)
 public class articleController {
@@ -18,14 +20,14 @@ public class articleController {
     @Autowired //스프링 부트가 미리 생성해 놓은 객체를 가져다가 자동 연결!
     private ArticleRepository articleRepository;
 
-    @GetMapping("/articles/new")
+    @GetMapping("/articles/new") //get -> 클라이언트가 요청
     public String newArticleForm() {
-        return "articles/new";
+        return "articles/new"; //view template 값을 준다
     }
 
-    @PostMapping("/articles/create")
-    public String createArticle(ArticleForm form) {
-        //System.out.println(form.toString()); -> 로깅 기능으로 대체
+    @PostMapping("/articles/create") // PostMapping - > 주소값을 일단 받고, 데이터들을 DTO 값으로 변환 후 매개변수로 전달
+    public String createArticle(ArticleForm form) { // 매개변수를 받고 함수 실행
+        //System.out.println(form.toString()); -> printf를 log.info 기능으로 대체
         log.info(form.toString());
 
         // 1. DTO를 변환! Entity!
@@ -37,7 +39,7 @@ public class articleController {
         //System.out.println(saved.toString());
         log.info(saved.toString());
 
-        return "";
+        return "redirect:"; // view template 값
     }
 
     @GetMapping("/articles/{id}") //id : 변환될 숫자
@@ -50,7 +52,21 @@ public class articleController {
         // 2. 가져온 데이터를 모델에 등록!
         model.addAttribute("article", articleEntity);
 
+
         // 3. 보여줄 페이지를 설정!
         return "/articles/show";
+    }
+
+    @GetMapping("/articles")
+    public String index(Model model) {
+        // 1: 모든 Article을 가져온다!
+        List<Article> articleEntityList = articleRepository.findAll();
+        //강제 형변환 또는 함수 리턴 타입을 맞춰준다 List<Article> - > Iterable
+
+        // 2: 가져온 Article 묶음을 뷰로 전달!
+        model.addAttribute("articleList", articleEntityList);
+
+        // 3: 뷰 페이지를 설정!
+        return "articles/index"; //articles/index.mustache
     }
 }

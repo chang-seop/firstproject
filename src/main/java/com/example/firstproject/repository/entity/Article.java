@@ -1,4 +1,4 @@
-package com.example.firstproject.entity;
+package com.example.firstproject.repository.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
