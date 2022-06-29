@@ -12,13 +12,13 @@
     {{#articleList}} <!-- 받은 객체가 배열이라면 반복해서 수행 후 클라이언트에게 전달  -->
         <tr>
             <th>{{id}}</th>
-            <td><a href="/articles/{{id}}">{{title}}</a></td>
+            <td><a href="/articles/{{id}}" >{{title}}</a></td>
             <td>{{content}}</td>
         </tr>
     {{/articleList}}
     </tbody>
 </table>
 
-<a href="/articles/new">New Article</a> <!-- 요청을 보낼 링크 주소를 가지고 있다. -->
+<a href="/articles/new" class = "btn btn-primary">New Article</a> <!-- 요청을 보낼 링크 주소를 가지고 있다. -->
 
 {{>layouts/footer}}
