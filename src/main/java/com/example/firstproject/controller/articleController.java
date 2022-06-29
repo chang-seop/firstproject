@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import java.util.List;
 
 @Controller
@@ -39,7 +38,7 @@ public class articleController {
         //System.out.println(saved.toString());
         log.info(saved.toString());
 
-        return "redirect:"; // view template 값
+        return "redirect:/articles/" + saved.getId(); // view template 값
     }
 
     @GetMapping("/articles/{id}") //id : 변환될 숫자
