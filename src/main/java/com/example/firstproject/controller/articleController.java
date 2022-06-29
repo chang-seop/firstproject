@@ -1,7 +1,7 @@
 package com.example.firstproject.controller;
 
 import com.example.firstproject.dto.ArticleForm;
-import com.example.firstproject.repository.entity.Article;
+import com.example.firstproject.entity.Article;
 import com.example.firstproject.repository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,5 +67,17 @@ public class articleController {
 
         // 3: 뷰 페이지를 설정!
         return "articles/index"; //articles/index.mustache
+    }
+
+    @GetMapping("/articles/{id}/edit") //{id} id - > pathVariable : id 같아야함
+    public String edit(@PathVariable Long id, Model model) { //수정 페이지
+        // 수정할 데이터를 가져오기
+        Article articleEntity = articleRepository.findById(id).orElse(null);
+
+        // 모델에 데이터를 등록
+        model.addAttribute("article", articleEntity);
+
+        // 뷰 페이지 설정
+        return "articles/edit";
     }
 }
