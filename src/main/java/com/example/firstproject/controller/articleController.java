@@ -24,6 +24,7 @@ public class articleController {
         return "articles/new"; //view template 값을 준다
     }
 
+    //데이터 DB에 삽입
     @PostMapping("/articles/create") // PostMapping - > 주소값을 일단 받고, 데이터들을 DTO 값으로 변환 후 매개변수로 전달
     public String createArticle(ArticleForm form) { // 매개변수를 받고 함수 실행
         //System.out.println(form.toString()); -> printf를 log.info 기능으로 대체
@@ -69,6 +70,7 @@ public class articleController {
         return "articles/index"; //articles/index.mustache
     }
 
+
     @GetMapping("/articles/{id}/edit") //{id} id - > pathVariable : id 같아야함
     public String edit(@PathVariable Long id, Model model) { //수정 페이지
         // 수정할 데이터를 가져오기
@@ -79,5 +81,27 @@ public class articleController {
 
         // 뷰 페이지 설정
         return "articles/edit";
+    }
+
+    //데이터 수정
+    @PostMapping("/articles/update")
+    public String update(ArticleForm form) { //id가 동일하기 때문에 같은 위치에 삽입한다. 즉, 업데이트
+        log.info(form.toString());
+
+        // 1: DTO를 엔티티로 변환한다!
+        Article articleEntity = form.toEntity();
+        log.info(articleEntity.toString());
+
+        // 2: 엔티티를 DB로 저장한다!
+        // 2-1 : DB에서 기존 데이터를 가져온다!
+        Article target = articleRepository.findById(articleEntity.getId()).orElse(null);
+
+        // 2-2 : 기존 데이터에 값을 갱신한다!
+        if(target != null) {
+            articleRepository.save(articleEntity); // 엔티티가 DB로 갱신
+        }
+
+        // 3: 수정 결과 페이지로 리다이렉트 한다!
+        return "redirect:/articles/" + articleEntity.getId();
     }
 }

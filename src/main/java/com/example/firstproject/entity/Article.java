@@ -27,5 +27,4 @@ public class Article {
     @Column
     private String content;
 
-    //Article() { } //default 생성자
 }
