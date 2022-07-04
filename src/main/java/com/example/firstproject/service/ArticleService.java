@@ -31,7 +31,7 @@ public class ArticleService {
         return articleRepository.save(target);
     }
 
-    public Article update(long id, ArticleForm dto) {
+    public Article update(Long id, ArticleForm dto) {
         // 1 : 수정용 엔티티 생성
         Article article = dto.toEntity();
         log.info("id {}, article: {}", id, article.toString());
