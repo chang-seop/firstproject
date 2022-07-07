@@ -39,11 +39,13 @@ public class ArticleService {
         Article target = articleRepository.findById(id).orElse(null);
 
         // 3 : 잘못된 요청 처리(대상이 없거나, id가 다른 경우)
+        if(article.getContent() == null && article.getTitle() == null) return null;
         if( target == null || id != article.getId()) {
             // 400, 잘못된 요청 응답!
             log.info("잘못된 요청! id {}, article: {}", id, article.toString());
             return null;
         }
+
         // 4 : 업데이트 및 정상 응답(200)
         target.patch(article);  //수정을 할 때 title과 content 중 하나만 수정이
         Article updated = articleRepository.save(target);

@@ -15,7 +15,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest // JPA와 연동 테스트
 class CommentRepositoryTest {
 
-    @Autowired CommentRepository commentRepository;
+    @Autowired
+    CommentRepository commentRepository;
 
     @Test
     @DisplayName("특정 게시글의 모든 댓글 조회")

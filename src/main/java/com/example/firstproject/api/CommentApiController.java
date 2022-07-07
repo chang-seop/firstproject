@@ -1,7 +1,6 @@
 package com.example.firstproject.api;
 
 import com.example.firstproject.dto.CommentDto;
-import com.example.firstproject.entity.Comment;
 import com.example.firstproject.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

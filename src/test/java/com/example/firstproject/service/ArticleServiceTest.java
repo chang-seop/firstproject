@@ -133,7 +133,7 @@ class ArticleServiceTest {
     void update_실패____id만_있는_dto_입력() {
         // 예상
         Long id = 1L;
-        ArticleForm dto = new ArticleForm(null, null, null);
+        ArticleForm dto = new ArticleForm(id, null, null);
 
         Article expected = null;
         // 실제

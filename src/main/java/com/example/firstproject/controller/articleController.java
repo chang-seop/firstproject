@@ -22,7 +22,6 @@ public class articleController {
 
     @Autowired //스프링 부트가 미리 생성해 놓은 객체를 가져다가 자동 연결!
     private ArticleRepository articleRepository;
-
     @Autowired
     private CommentService commentService;
 
@@ -77,7 +76,6 @@ public class articleController {
         // 3: 뷰 페이지를 설정!
         return "articles/index"; //articles/index.mustache
     }
-
 
     @GetMapping("/articles/{id}/edit") //{id} id - > pathVariable : id 같아야함
     public String edit(@PathVariable Long id, Model model) { //수정 페이지
