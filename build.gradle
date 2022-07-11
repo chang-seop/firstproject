@@ -13,6 +13,14 @@ repositories {
 }
 
 dependencies {
+
+	// PostgreSQL 드라이버 추가!
+	runtimeOnly 'org.postgresql:postgresql'
+
+	// Oracle 드라이버 추가!
+	// mysql 드라이버 추가!
+	// Start.spring.io 디펜던시 찾기 -> EXPLORE 클릭 하면 gradle 추가할 코드 뜸
+
     implementation 'org.projectlombok:lombok:1.18.22'
 	implementation 'org.projectlombok:lombok:1.18.22'
 
