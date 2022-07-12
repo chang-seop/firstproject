@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 @Slf4j // 로깅 기능
 public class DebuggingAspect {
 
-    // 대상 메소드 선택: CommentService#create()
-    @Pointcut("execution(* com.example.firstproject.service.CommentService.*(..))")
+    // 대상 메소드 선택: api 패키지의 모든 메소드
+    @Pointcut("execution(* com.example.firstproject.api.*.*(..))")
     // 모든 함수를 선택할 때는 * 키워드 사용
     private void cut() {}
 
@@ -28,9 +28,11 @@ public class DebuggingAspect {
         String className = joinPoint.getTarget()
                 .getClass()
                 .getSimpleName();
+
         // 메소드 명
         String methodName = joinPoint.getSignature()
                 .getName();
+
         // 입력값 로깅하기
         // CommentService#create()의 입력값 =>5
         // CommentService#create()의 입력값 => CommentDto(id=null, ...)
@@ -47,6 +49,7 @@ public class DebuggingAspect {
         String className = joinPoint.getTarget()
                 .getClass()
                 .getSimpleName();
+
         // 메소드 명
         String methodName = joinPoint.getSignature()
                 .getName();
